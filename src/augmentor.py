@@ -54,7 +54,8 @@ def imageAugmentor(x_train, y_train, aug_Images=2500, maintain_Ratio=False):
   dict_class = {}
   total_Count = 0
 
-  print(len(x_train),len(y_train))
+  print('X Train Size: ',len(x_train))
+  print('Y Train Size: ', len(y_train))
 
   if not maintain_Ratio:
     for cat in set(y_train):
@@ -70,19 +71,11 @@ def imageAugmentor(x_train, y_train, aug_Images=2500, maintain_Ratio=False):
     print(k,v[0],v[1])
 
   for clss,img_count in dict_class.items():
-
     maxImg = int(math.ceil(img_count[0]/img_count[1]))
     generator = generate_perImageCount(img_count[1],img_count[0],1,maxImg)
     index_class = [i for i,category in enumerate(y_train) if category == clss]
     for i,idx in enumerate(index_class):
-
       image = x_train[idx]
-
-      #print(f'Reading {img}')
-
-#      image = cv2.imread(os.path.join(images_path,img),1)
-#      img = img.split('.')[0]
-
       #For each image how many different augmented images to be formed is stored in perImg
       perImgCount = generator[i]
 
